@@ -1,4 +1,5 @@
 import getConnection from "./../db/database.js"
+
 const getCategorias = async (req, res)=>{
     try {
         const connection  = await getConnection();
@@ -7,8 +8,6 @@ const getCategorias = async (req, res)=>{
     } catch (error) {
         console.error("Error 500");
     }
-   
-
 }
 const postCategorias = async (req, res)  =>{
     try {
@@ -69,6 +68,8 @@ const updateCategorias = async (req, res)  =>{
         console.error("ERROR 500");
     } 
 }
+   
+
 export const methodHTTP = {
     getCategorias,
     postCategorias,
