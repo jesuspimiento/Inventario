@@ -27,6 +27,11 @@ app.use("/api/clientes",clientesRoute)
 
 app.use("/api/productos",productosRoute)
 
+app.get ('/',(req,res)=>{
+    res.send('REST API EN RENDER WITHOUT ENDPOINTS')
+
+})
+
 /* Hacemos dsiponible a mi server app para toda la aplicacion*/
  
 export default app;
