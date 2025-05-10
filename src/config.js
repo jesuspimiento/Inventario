@@ -7,5 +7,5 @@ export default {
     database : process.env.DATABASE,
     user : process.env.USER,
     password : process.env.PASSWORD,
-    port : 3307
+    port : 3306
 }
