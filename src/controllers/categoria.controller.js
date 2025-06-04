@@ -2,8 +2,8 @@ import getConnection from "./../db/database.js"
 
 const getCategorias = async (req, res)=>{
     try {
-        const connection  = await getConnection();
-        const result = await connection.query("SELECT CategoriaID, CategoriaNombre, Descripcion, Imagen FROM categorias")
+        const pool  = await getConnection();
+        const result = await pool.query("SELECT CategoriaID, CategoriaNombre, Descripcion, Imagen FROM categorias")
         res.json(result);
     } catch (error) {
         console.error("Error 500");
@@ -15,9 +15,9 @@ const postCategorias = async (req, res)  =>{
 
         const category ={CategoriaNombre, Descripcion, Imagen}
     
-        const connection  = await getConnection();
+        const pool = await getConnection();
 
-        const result = await connection.query("INSERT INTO categorias SET ?", category)
+        const result = await pool.query("INSERT INTO categorias SET ?", category)
 
         res.json(result)
 
@@ -30,8 +30,8 @@ const getCategory = async (req, res)=>{
     try {
         console.log(req.param);
         const {id} = req.params
-        const connection  = await getConnection();
-        const result = await connection.query("SELECT CategoriaID, CategoriaNombre, Descripcion, Imagen FROM categorias WHERE CategoriaID = ?", id)
+        const pool  = await getConnection();
+        const result = await pool.query("SELECT CategoriaID, CategoriaNombre, Descripcion, Imagen FROM categorias WHERE CategoriaID = ?", id)
         res.json(result);
     } catch (error) {
         console.error("Error 500");
@@ -42,8 +42,8 @@ const deleteCategory = async (req, res)=>{
     try {
         console.log("Id de categoria a borrar: ",req.params);
         const {id} = req.params
-        const connection  = await getConnection();
-        const result = await connection.query("DELETE FROM categorias WHERE CategoriaID = ?", id)
+        const pool  = await getConnection();
+        const result = await pool.query("DELETE FROM categorias WHERE CategoriaID = ?", id)
         res.json(result);
     } catch (error) {
         console.error("Error 500");
@@ -58,9 +58,9 @@ const updateCategorias = async (req, res)  =>{
 
         const category ={CategoriaNombre, Descripcion, Imagen}
     
-        const connection  = await getConnection();
+        const pool  = await getConnection();
 
-        const result = await connection.query("UPDATE categorias SET ? WHERE CategoriaID = ?",[category, id])
+        const result = await pool.query("UPDATE categorias SET ? WHERE CategoriaID = ?",[category, id])
 
         res.json(result)
 

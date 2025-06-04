@@ -2,7 +2,7 @@ import mysql from "mysql2/promise"
 
 import config from "./../config.js"
 
-const connection  = mysql.createConnection({
+const pool = mysql.createPool({
     host : config.host,
     database : config.database,
     user : config.user,
@@ -11,7 +11,7 @@ const connection  = mysql.createConnection({
 })
 
 const getConnection = () =>{
-    return connection
+    return pool
 }
 
 export default getConnection;

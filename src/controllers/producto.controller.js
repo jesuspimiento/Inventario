@@ -10,27 +10,26 @@ const getProductos= async (req, res)=>{
     }
 }
 
-const updateProductos = async (req, res)  =>{
+const postProductos = async (req, res)  =>{
+
     try {
+        const {ProductoNombre, ProveedorID, CategoriaID, CantidadPorUnidad, PrecioUnitario, UnidadesStock, UnidadesPedidas, Discontinuado} = req.body;
 
-        const {id} = req.params
-        const {ProductoNombre, ProveedorID, CategoriaID, CantidadPorUnidad, PrecioUnitario, UnidadesStock, UnidadesPedidas, NivelReorden, Discontinuado} = req.body;
-
-        const products ={ProductoNombre, ProveedorID, CategoriaID, CantidadPorUnidad, PrecioUnitario, UnidadesStock, UnidadesPedidas, NivelReorden, Discontinuado}
+        const products ={ProductoNombre, ProveedorID, CategoriaID, CantidadPorUnidad, PrecioUnitario, UnidadesStock, UnidadesPedidas, Discontinuado}
     
         const connection  = await getConnection();
 
-        const result = await connection.query("UPDATE productos SET ? WHERE ProductoID = ?",[products, id])
+        const result = await connection.query("INSERT INTO productos SET ?", products)
 
         res.json(result)
 
     } catch (error) {
         console.error("ERROR 500");
-    } 
+    }
 }
-   
+
 export const methodHTTP = {
     getProductos,
-    updateProductos
-
+    postProductos
+    
 }
